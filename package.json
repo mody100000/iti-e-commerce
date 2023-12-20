@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@firebase/app": "^0.9.25",
-    "@firebase/database": "^1.0.2"
+    "@firebase/database": "^1.0.2",
+    "uuid": "^9.0.1"
   }
 }

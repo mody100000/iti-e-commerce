@@ -1,5 +1,8 @@
 // bootstrab
-const bootstrap = require("bootstrap");
-const { getApp } = require("@firebase/app");
+require("bootstrap");
+require("./firebase/config");
 
-console.log("working");
+const init = async () => {
+  await require("./products/list");
+};
+init();
