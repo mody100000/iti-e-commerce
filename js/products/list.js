@@ -1,37 +1,36 @@
 // this file is for getting all the products and list them in a table
 
-const { onValue } = require("@firebase/database");
 const { getFirebaseRef } = require("../firebase/util");
 const { deleteProduct } = require("./delete");
+const { addRowToTable } = require("../ui/table");
+const { createASpinner } = require("../ui/spinner");
+const { get } = require("@firebase/database");
 const TABLE_ID = "products-table";
 
 const tableRef = document.getElementById(TABLE_ID);
 
 const getAllProducts = async () => {
-  const tbodyRef = tableRef.getElementsByTagName("tbody")[0];
-  //   TODO: add a spinner loader
-  onValue(getFirebaseRef("products"), (snapshot) => {
-    const products = snapshot.val();
+  const productsRef = getFirebaseRef("products");
+  const spinner = createASpinner("products-list");
 
-    Object.entries(products).forEach(([productKey, productData], index) => {
-      // Insert a row at the end of table
-      var newRow = tbodyRef.insertRow();
+  spinner.show();
+  const snapshot = await get(productsRef);
+  spinner.hide();
 
-      var idCell = newRow.insertCell();
-      idCell.appendChild(document.createTextNode(productKey));
+  const products = snapshot.val();
+  if (!products) return;
 
-      // Insert a cell at the end of the row
-      var idCell = newRow.insertCell();
-      idCell.appendChild(document.createTextNode(productData.name));
+  Object.entries(products).forEach(([productKey, productData], index) => {
+    const delBtn = document.createElement("button");
+    delBtn.classList.add("btn", "btn-danger");
+    delBtn.textContent = "Delete";
+    delBtn.onclick = () => deleteProduct(productKey, index);
 
-      //   delete button
-      var deleteCell = newRow.insertCell();
-      const delBtn = document.createElement("button");
-      delBtn.classList.add("btn", "btn-danger");
-      delBtn.textContent = "Delete";
-      delBtn.onclick = () => deleteProduct(productKey);
-      deleteCell.appendChild(delBtn);
-    });
+    addRowToTable(TABLE_ID, productKey, [
+      document.createTextNode(productKey),
+      document.createTextNode(productData.name),
+      delBtn,
+    ]);
   });
 };
 

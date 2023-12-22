@@ -1,1 +1,9 @@
 @import url("~bootstrap/dist/css/bootstrap.min.css");
+@import url("~toastify-js/src/toastify.css");
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
