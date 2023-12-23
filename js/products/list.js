@@ -5,6 +5,7 @@ const { deleteProduct } = require("./delete");
 const { addRowToTable } = require("../ui/table");
 const { createASpinner } = require("../ui/spinner");
 const { get } = require("@firebase/database");
+const { isAuthenticated } = require("../auth/checkAuth");
 const TABLE_ID = "products-table";
 
 const tableRef = document.getElementById(TABLE_ID);
@@ -36,7 +37,6 @@ const getAllProducts = async () => {
 
 if (tableRef) {
   // products page is shown
-
-  // TODO: check the authentication for admin and redirect if not authorized
-  getAllProducts();
+  const valid = isAuthenticated();
+  if (valid) getAllProducts();
 }

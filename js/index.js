@@ -3,6 +3,7 @@ require("bootstrap");
 require("./firebase/config");
 
 const init = async () => {
-  await require("./products/list");
+  require("./products/list");
+  require("./auth/login");
 };
 init();
