@@ -4,7 +4,7 @@ const { getFirebaseRef } = require("../firebase/util");
 const { deleteProduct } = require("./delete");
 const { addRowToTable } = require("../ui/table");
 const { createASpinner } = require("../ui/spinner");
-const { get } = require("@firebase/database");
+const { get, push } = require("@firebase/database");
 const { isAuthenticated } = require("../auth/checkAuth");
 const TABLE_ID = "products-table";
 
@@ -14,6 +14,9 @@ const getAllProducts = async () => {
   const productsRef = getFirebaseRef("products");
   const spinner = createASpinner("products-list");
 
+  // await push(productsRef, {
+  //   name: "product 1"
+  // })
   spinner.show();
   const snapshot = await get(productsRef);
   spinner.hide();
