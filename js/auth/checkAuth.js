@@ -12,6 +12,7 @@ const isAuthenticated = () => {
     const payload = jwtDecode(token);
     // save the user data
     window.user = payload;
+    return true;
   } catch {
     console.log("token is invalid");
     localStorage.removeItem("TOKEN");

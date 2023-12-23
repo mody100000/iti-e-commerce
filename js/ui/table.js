@@ -1,13 +1,9 @@
 /**
- * @param {string} tableId
+ * @param {HTMLElement} tbodyRef
  * @param {string} rowId
  * @param {HTMLElement[]} elements
  */
-const addRowToTable = (tableId, rowId, elements) => {
-  const tbodyRef = document
-    .getElementById(tableId)
-    .getElementsByTagName("tbody")[0];
-
+const addRowToTable = (tbodyRef, rowId, elements) => {
   const newRow = tbodyRef.insertRow();
   newRow.id = rowId;
   elements.forEach((element) => {
