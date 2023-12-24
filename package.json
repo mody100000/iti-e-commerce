@@ -4,7 +4,8 @@
     "dev": "webpack serve --config webpack.config.js --mode development"
   },
   "devDependencies": {
-    "bootstrap": "4.3.1",
+    "bootstrap": "5.0.2",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.7.6",

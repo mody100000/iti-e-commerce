@@ -33,7 +33,7 @@ async function crud(wrapperId, ref, fieldsConfig) {
 
   // add add button
   const addBtn = $(`
- <button class="btn btn-success mb-4 ml-4" data-toggle="modal" data-target="#modal-${ref}">Create ${ref}</button>
+ <button class="btn btn-success mb-4 ml-4" data-bs-toggle="modal" data-bs-target="#modal-${ref}">Create ${ref}</button>
 `);
 
   addBtn.on("click", () => {
@@ -117,8 +117,8 @@ async function crud(wrapperId, ref, fieldsConfig) {
     const editBtn = document.createElement("button");
     editBtn.classList.add("btn", "btn-info");
     editBtn.textContent = "Edit";
-    editBtn.setAttribute("data-toggle", "modal");
-    editBtn.setAttribute("data-target", `#modal-${ref}`);
+    editBtn.setAttribute("data-bs-toggle", "modal");
+    editBtn.setAttribute("data-bs-target", `#modal-${ref}`);
     editBtn.onclick = () => showEditModel(item, refId);
 
     const cells = Object.values(item).map((v) => {
@@ -153,7 +153,7 @@ function renderModal(ref, wrapperRef) {
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -247,7 +247,7 @@ async function fillModalDynamicData(ref, fields, itemRef, data) {
         element = fromHTML(`
         <div class="form-outline mb-4">
         <label class="form-label" for="${field.name}">${field.name}</label>
-          <select class="custom-select" id="${field.name}" name="${field.name}">
+          <select class="form-select" id="${field.name}" name="${field.name}">
             ${fkCollections[field.name].map(
               (key) => `
               <option 
@@ -263,7 +263,9 @@ async function fillModalDynamicData(ref, fields, itemRef, data) {
         element = fromHTML(`
         <div class="form-outline mb-4">
           <label class="form-label" for="${field.name}">${field.name}</label>
-          <textarea class="form-control" id="${field.name}" name="${field.name}" rows="3">${isEditing ? data[field.name] : ""}</textarea>
+          <textarea class="form-control" id="${field.name}" name="${
+          field.name
+        }" rows="3">${isEditing ? data[field.name] : ""}</textarea>
         </div>
 
           `);
@@ -282,7 +284,7 @@ async function fillModalDynamicData(ref, fields, itemRef, data) {
   // add close button to modal
   modalFooter.append(
     fromHTML(`
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
   `)
   );
 

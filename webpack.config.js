@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -52,6 +53,10 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
   },
+  // output: {
+  //   path: path.resolve(__dirname, "dist"),
+  //   publicPath: "/",
+  // },
   // Optional and for development only. This provides the ability to
   // map the built code back to the original source format when debugging.
   devtool: isProduction ? undefined : "eval-source-map",
@@ -81,6 +86,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [{ from: "images", to: "images" }],
+    }),
     new MiniCssExtractPlugin({
       filename: "css/[name].css",
       chunkFilename: "css/[name].[contenthash:8].css",

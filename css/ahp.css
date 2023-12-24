@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#upperSpace {
+  height: 10vh;
+}
+.logo {
+  height: 10vh;
+  width: auto;
+  margin-right: 5vw;
+}
+.logoImg {
+  height: 10vh;
+  width: auto;
+  border-radius: 10px;
+}

@@ -1,5 +1,7 @@
 @import url("~bootstrap/dist/css/bootstrap.min.css");
 @import url("~toastify-js/src/toastify.css");
+@import url("./ahp.css");
+@import url("./uhp.css");
 
 .center {
   display: flex;
@@ -17,4 +19,52 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: rgb(236, 236, 236);
+}
+.content {
+  margin: 1rem;
+  background-color: white;
+  border-radius: 15px;
+}
+#upperSpace {
+  height: 15vh;
+}
+.logoImg {
+  height: auto;
+  width: 100%;
+}
+#hp_image {
+  width: 100%;
+  height: auto;
+}
+.login_txt {
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2vw;
+}
+#form_box {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  background-color: white;
+}
+#alr {
+  text-align: center;
+}
+.btns {
+  width: 100%;
+}
+.backgroundImg {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  object-fit: cover;
+  z-index: -1;
 }

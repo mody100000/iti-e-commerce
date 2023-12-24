@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#upperSpace {
+  height: 10vh;
+}
+.logo {
+  height: 10vh;
+  width: auto;
+  margin-right: 5vw;
+}
+.logoImg {
+  height: 10vh;
+  width: auto;
+  border-radius: 10px;
+}
+.c_img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.cards {
+  border-radius: 20px;
+  margin-bottom: 2vh;
+}
+.fp {
+  font-size: 5vw;
+  text-align: center;
+}
+.product-card-image {
+  max-height: 250px;
+  min-height: 250px;
+  object-fit: cover;
+  border: 1px solid #eeee;
+}
