@@ -21,6 +21,8 @@ const isAuthenticated = () => {
 };
 
 const redirectToLogin = () => {
+  const inLoginPage = (window.location.pathname === "/pages/auth/login.html")
+  if(inLoginPage) return
   window.location = "/pages/auth/login.html";
 };
 

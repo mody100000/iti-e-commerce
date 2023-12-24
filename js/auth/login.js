@@ -31,6 +31,7 @@ const handleFormLogin = (event) => {
 
       showToast(`great you are signed in with user ${user.email}`, "success");
       //   TODO: redirect the user
+      window.location = "/pages/admin/index.html"
     })
     .catch((error) => {
       const errorMessage = error.message;
