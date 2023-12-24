@@ -1,5 +1,6 @@
 const { initializeApp } = require("@firebase/app");
 const { getDatabase } = require("@firebase/database");
+const { getStorage } = require("@firebase/storage");
 
 const config = {
   apiKey: "AIzaSyALWI1F4sKFd-skGlNUSpZlClMQVowJjWQ",
@@ -14,4 +15,4 @@ const config = {
 
 const app = initializeApp(config);
 
-module.exports = { app, db: getDatabase(app) };
+module.exports = { app, db: getDatabase(app), storage: getStorage(app) };
