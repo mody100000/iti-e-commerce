@@ -97,9 +97,6 @@ if (pathname.startsWith("/pages/admin") && !pathname.includes("login")) {
   );
 }
 
-const productsWrapperRef = document.getElementById("products-list");
-const categoriesWrapperRef = document.getElementById("categories-list");
-
 const getAllProducts = async () => {
   crud("products-list", "products", [
     {
@@ -142,14 +139,11 @@ const getAllCategories = async () => {
 const valid = isAuthenticated();
 
 if (valid) {
-  if (productsWrapperRef) {
+  if (pathname === "/pages/admin/products/index.html") {
     getAllProducts();
-  }
-  if (categoriesWrapperRef) {
+  } else if (pathname === "/pages/admin/category/index.html") {
     getAllCategories();
-  }
-
-  if (pathname === USER_HOMEPAGE_PATH) {
+  } else if (pathname === USER_HOMEPAGE_PATH) {
     renderProductsGrid();
   } else if (pathname === "/pages/users/product.html") {
     getProductDetails();

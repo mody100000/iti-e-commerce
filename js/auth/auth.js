@@ -5,6 +5,11 @@ const {
   createUserWithEmailAndPassword,
 } = require("@firebase/auth");
 const $ = require("jquery");
+const {
+  ADMIN_LOGIN_FORM_ID,
+  USER_LOGIN_FORM_ID,
+  USER_SIGNUP_FORM_ID,
+} = require("../constants");
 
 const USER_HOMEPAGE_PATH = "/pages/users/user_home_page.html";
 const USER_LOGIN_PATH = "/pages/users/user_login.html";
@@ -18,7 +23,7 @@ const ADMIN_LOGIN_PATH = "/pages/admin/login/admin_login.html";
 const handleAdminFormLogin = (event) => {
   event.preventDefault();
 
-  const form = document.forms["admin-login-form"];
+  const form = document.forms[ADMIN_LOGIN_FORM_ID];
 
   const formData = new FormData(form);
   const email = formData.get("email");
@@ -57,7 +62,7 @@ const handleAdminFormLogin = (event) => {
 const handleUserLogin = (event) => {
   event.preventDefault();
 
-  const form = document.forms["user-login-form"];
+  const form = document.forms[USER_LOGIN_FORM_ID];
 
   const formData = new FormData(form);
   const email = formData.get("email");
@@ -95,7 +100,7 @@ const handleUserLogin = (event) => {
 const handleUserRegisteration = (event) => {
   event.preventDefault();
 
-  const form = document.forms["user-signup-form"];
+  const form = document.forms[USER_SIGNUP_FORM_ID];
 
   const serialized = $(form).serializeArray();
   const data = serialized.reduce((prev, curr) => {
@@ -132,9 +137,9 @@ const handleUserRegisteration = (event) => {
     });
 };
 
-const adminLoginFormRef = document.getElementById("admin-login-form");
-const userLoginFormRef = document.getElementById("user-login-form");
-const userSignupFormRef = document.getElementById("user-signup-form");
+const adminLoginFormRef = document.getElementById(ADMIN_LOGIN_FORM_ID);
+const userLoginFormRef = document.getElementById(USER_LOGIN_FORM_ID);
+const userSignupFormRef = document.getElementById(USER_SIGNUP_FORM_ID);
 
 const pathname = window.location.pathname;
 
