@@ -73,7 +73,9 @@ const showProductsInCart = async () => {
     tableBodyRef.append(
       $(`
       <tr>
-        <td><img src="${product.image}" alt="${
+        <td><img src="${
+          product.image
+        }" class="cover" width="50" height="50" alt="${
         product.title
       }" class="img-thumbnail" width="100" height="100"></td>
         <td>${product.title}</td>

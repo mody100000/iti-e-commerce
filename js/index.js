@@ -8,8 +8,9 @@ const { fromHTML } = require("./ui/utils");
 const { renderProductsGrid, getProductDetails } = require("./user/products");
 const { showProductsInCart } = require("./user/cart");
 const { listUserOrders } = require("./user/order");
+const { USER_HOMEPAGE_PATH, ADMIN_HOMEPAGE_PATH } = require("./auth/auth");
 const init = async () => {
-  require("./auth/login");
+  require("./auth/auth");
 };
 init();
 
@@ -30,7 +31,7 @@ if (pathname.startsWith("/pages/admin") && !pathname.includes("login")) {
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="/pages/admin/index.html">Home</a>
+            <a class="nav-link" href="${ADMIN_HOMEPAGE_PATH}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/pages/admin/products/index.html">Products</a>
@@ -65,7 +66,7 @@ if (pathname.startsWith("/pages/admin") && !pathname.includes("login")) {
           <a
             class="nav-link active"
             aria-current="page"
-            href="/pages/users/user_home_page.html"
+            href="${USER_HOMEPAGE_PATH}"
             >Home</a
           >
         </li>
@@ -148,7 +149,7 @@ if (valid) {
     getAllCategories();
   }
 
-  if (pathname === "/pages/users/user_home_page.html") {
+  if (pathname === USER_HOMEPAGE_PATH) {
     renderProductsGrid();
   } else if (pathname === "/pages/users/product.html") {
     getProductDetails();

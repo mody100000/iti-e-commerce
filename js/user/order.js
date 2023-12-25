@@ -41,7 +41,19 @@ const listUserOrders = async () => {
             aria-expanded="true"
             aria-controls="order-collaps-${orderRef}"
           >
-            Order #${orderRef.substring(0, 5)} - Status: ${order.status}
+            Order #${orderRef.substring(0, 5)} - Status: <span class="badge mx-2
+            ${
+              order.status === "pending"
+                ? "bg-warning"
+                : order.status === "approved"
+                ? "bg-success"
+                : order.status === "denied"
+                ? "bg-danger"
+                : ""
+            }
+            
+            
+            ">${order.status}</span>
           </button>
         </h2>
         <div

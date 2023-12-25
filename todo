@@ -7,7 +7,7 @@
 - [x] customer can view his orders and its status (pending / approved/on-way / denied)
 - [] customer can remove products from cart
 - [] filter products for customers
-- [] auth for user
+- [x] auth for user
 
 ## Admin
 

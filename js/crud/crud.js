@@ -153,8 +153,7 @@ function renderModal(ref, wrapperRef) {
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="btn btn-close" data-bs-dismiss="modal" >
           </button>
         </div>
         <div class="modal-body" id="modal-${ref}-body">
@@ -293,9 +292,28 @@ async function fillModalDynamicData(ref, fields, itemRef, data) {
   <button type="button" class="btn btn-primary">Save changes</button>
   `);
 
+  /**
+   *
+   * @param {() => Promise<void>} fn
+   * @return {() => Promise<void>}
+   */
+  const handlerWrapper = (fn, ...args) => {
+    return async () => {
+      $(saveBtn).prop("disabled", true);
+      await fn(...args);
+      $(saveBtn).prop("disabled", false);
+    };
+  };
+
   saveBtn.onclick = isEditing
-    ? () => handleCreateAndUpdate(ref, form, fields, `${ref}/${itemRef}`)
-    : () => handleCreateAndUpdate(ref, form, fields);
+    ? handlerWrapper(
+        handleCreateAndUpdate,
+        ref,
+        form,
+        fields,
+        `${ref}/${itemRef}`
+      )
+    : handlerWrapper(handleCreateAndUpdate, ref, form, fields);
   modalFooter.append(saveBtn);
 }
 
