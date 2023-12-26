@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>user register</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div id="upperSpace" class="row">
+        <div class="col-11"></div>
+        <div class="col-1">
+          <img src="/images/logo.png" alt="logo" class="logoImg" />
+        </div>
+      </div>
+      <div id="login_form" class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <div id="form_box" class="container-fluid p-4">
+            <form class="row g-3" id="user-signup-form">
+              <div class="col-md-6">
+                <label for="firstName" class="form-label">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="First name"
+                  id="firstName"
+                  name="firstName"
+                />
+                <div class="valid-feedback">valid input</div>
+              </div>
+              <div class="col-md-6">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Last name"
+                  id="lastName"
+                  name="lastName"
+                />
+                <div class="valid-feedback">valid input</div>
+              </div>
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="inputEmail4"
+                  name="email"
+                  placeholder="your email"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="inputPassword4"
+                  name="password"
+                  placeholder="your password"
+                />
+              </div>
+
+              <div class="col-12">
+                <button
+                  type="submit"
+                  class="btn btn-warning btns"
+                  id="signup-btn"
+                >
+                  Sign up
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

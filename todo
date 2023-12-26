@@ -1,55 +1,48 @@
 ## Customer
--[] customer can view all products
--[] customer can view a single product
--[] customer can add products to cart
--[] customer can remove products from cart
--[] customer can create order and then the cart will be empty
--[] customer can view his orders and its status (pending / approved/on-way / denied)
+
+- [x] customer can view all products
+- [x] customer can view a single product
+- [x] customer can add products to cart
+- [x] customer can create order and then the cart will be empty
+- [x] customer can view his orders and its status (pending / approved/on-way / denied)
+- [] customer can remove products from cart
+- [] filter products for customers
+- [x] auth for user
 
 ## Admin
--[] categories crud
--[] admin can view all prodcuts in table
--[] delete / update /create product
--[] admin can view incoming orders
--[] admin can approve / deny orders
--[] delete with confirmation
 
-
-
-fieldsConfig: []{
-    type: "number" | "string" | "long_string" | "dropdown"
-    name: string
-}
-
-function crud(tableID, ref, fieldsConfig){
-
-}
-
+- [x] categories crud
+- [x] admin can view all prodcuts in table
+- [x] delete / update /create product
+- [x] auth for admin
+- [x] admin can view incoming orders
+- [x] admin can approve / deny orders
+- [] delete with confirmation
 
 ---
-schema
----
+
+## schema
 
 category: {
-    ref: firebase ref
-    name: string
+ref: firebase ref
+name: string
 }
 
 product: {
-    ref
-    name: string
-    description: string
-    categoryRef: string
-    price: number
-    stock: number
-    image: string
+ref
+name: string
+description: string
+categoryRef: string
+price: number
+stock: number
+image: string
 }
 
 order: {
-    ref
-    status: "pending" | "approved" | "denied"
-    userRef: ref
-    productRefs: json array of refs
+ref
+status: "pending" | "approved" | "denied"
+userRef: ref
+productRefs: json array of refs
 }
 
 cart: local storage // TODO: use firebase instead of local storage

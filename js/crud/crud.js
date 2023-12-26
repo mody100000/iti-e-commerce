@@ -23,9 +23,9 @@ async function crud(wrapperId, ref, fieldsConfig) {
   const tbodyRef = tableRef.querySelector("tbody");
   const theadRef = tableRef.querySelector("thead");
 
-  renderModal(ref, wrapperRef);
+  const modal = getCreateAndEditModal(ref)
+  wrapperRef.append(modal);
 
-  // show items
   const spinner = createASpinner(wrapperId);
   spinner.show();
   const snapshot = await get(getFirebaseRef(ref));
@@ -33,7 +33,7 @@ async function crud(wrapperId, ref, fieldsConfig) {
 
   // add add button
   const addBtn = $(`
- <button class="btn btn-success mb-4 ml-4" data-toggle="modal" data-target="#modal-${ref}">Create ${ref}</button>
+ <button class="btn btn-success mb-4 ml-4" data-bs-toggle="modal" data-bs-target="#modal-${ref}">Create ${ref}</button>
 `);
 
   addBtn.on("click", () => {
@@ -117,8 +117,8 @@ async function crud(wrapperId, ref, fieldsConfig) {
     const editBtn = document.createElement("button");
     editBtn.classList.add("btn", "btn-info");
     editBtn.textContent = "Edit";
-    editBtn.setAttribute("data-toggle", "modal");
-    editBtn.setAttribute("data-target", `#modal-${ref}`);
+    editBtn.setAttribute("data-bs-toggle", "modal");
+    editBtn.setAttribute("data-bs-target", `#modal-${ref}`);
     editBtn.onclick = () => showEditModel(item, refId);
 
     const cells = Object.values(item).map((v) => {
@@ -135,8 +135,8 @@ async function crud(wrapperId, ref, fieldsConfig) {
     addRowToTable(tbodyRef, refId, [
       document.createTextNode(refId), // id
       ...cells, // rest of the data
-      delBtn, // delete button
       editBtn, // edit button
+      delBtn, // delete button
     ]);
   });
 }
@@ -144,17 +144,15 @@ async function crud(wrapperId, ref, fieldsConfig) {
 /**
  *
  * @param {string} ref
- * @param {HTMLElement} wrapperRef
  */
-function renderModal(ref, wrapperRef) {
+function getCreateAndEditModal(ref) {
   const modal = fromHTML(`
     <div class="modal fade" id="modal-${ref}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="btn btn-close" data-bs-dismiss="modal" >
           </button>
         </div>
         <div class="modal-body" id="modal-${ref}-body">
@@ -165,7 +163,7 @@ function renderModal(ref, wrapperRef) {
       </div>
     </div>
   `);
-  wrapperRef.appendChild(modal);
+  return modal
 }
 
 /**
@@ -200,10 +198,9 @@ async function fillModalDynamicData(ref, fields, itemRef, data) {
     const value = snapshot.val();
     if (!value) fkCollections[field.name] = [];
     else
-      fkCollections[field.name] = Object.values(value).map((item) => item.name);
+      fkCollections[field.name] = Object.values(value).map((item) => item["name"]);
   }
 
-  console.log(fkCollections);
   fields.forEach((field) => {
     let element;
     switch (field.type) {
@@ -247,7 +244,7 @@ async function fillModalDynamicData(ref, fields, itemRef, data) {
         element = fromHTML(`
         <div class="form-outline mb-4">
         <label class="form-label" for="${field.name}">${field.name}</label>
-          <select class="custom-select" id="${field.name}" name="${field.name}">
+          <select class="form-select" id="${field.name}" name="${field.name}">
             ${fkCollections[field.name].map(
               (key) => `
               <option 
@@ -263,7 +260,9 @@ async function fillModalDynamicData(ref, fields, itemRef, data) {
         element = fromHTML(`
         <div class="form-outline mb-4">
           <label class="form-label" for="${field.name}">${field.name}</label>
-          <textarea class="form-control" id="${field.name}" name="${field.name}" rows="3">${isEditing ? data[field.name] : ""}</textarea>
+          <textarea class="form-control" id="${field.name}" name="${
+          field.name
+        }" rows="3">${isEditing ? data[field.name] : ""}</textarea>
         </div>
 
           `);
@@ -282,18 +281,37 @@ async function fillModalDynamicData(ref, fields, itemRef, data) {
   // add close button to modal
   modalFooter.append(
     fromHTML(`
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
   `)
   );
 
   // add save button to modal
   const saveBtn = fromHTML(`
-  <button type="button" class="btn btn-primary">Save changes</button>
+    <input type="submit" value="Save changes" class="btn btn-primary"/>
   `);
 
+  /**
+   *
+   * @param {() => Promise<void>} fn
+   * @return {() => Promise<void>}
+   */
+  const handlerWrapper = (fn, ...args) => {
+    return async () => {
+      $(saveBtn).prop("disabled", true);
+      await fn(...args);
+      $(saveBtn).prop("disabled", false);
+    };
+  };
+
   saveBtn.onclick = isEditing
-    ? () => handleCreateAndUpdate(ref, form, fields, `${ref}/${itemRef}`)
-    : () => handleCreateAndUpdate(ref, form, fields);
+    ? handlerWrapper(
+        handleCreateAndUpdate,
+        ref,
+        form,
+        fields,
+        `${ref}/${itemRef}`
+      )
+    : handlerWrapper(handleCreateAndUpdate, ref, form, fields);
   modalFooter.append(saveBtn);
 }
 

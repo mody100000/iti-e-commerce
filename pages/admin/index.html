@@ -4,9 +4,67 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-Commerce</title>
+    <title>admin home page</title>
   </head>
-  <body>
+  <body style="background-color: rgb(236, 236, 236)">
+    <div class="container-fluid">
+      <div class="row mt-5">
+        <div class="col-12 col-sm-4" style="margin-bottom: 3vh">
+          <div class="card cards" style="width: 100%">
+            <img
+              src="../../images/edit_product.webp"
+              class="card-img-top"
+              alt="edit_product"
+            />
+            <div class="card-body">
+              <a
+                href="/pages/admin/products/index.html"
+                class="btn btn-warning m-3"
+                >Products</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-4" style="margin-bottom: 3vh">
+          <div class="card cards" style="width: 100%">
+            <img
+              src="../../images/edit_category2.jpg"
+              class="card-img-top"
+              alt="edit_category2"
+            />
+            <div class="card-body">
+              <a
+                href="/pages/admin/category/index.html"
+                class="btn btn-warning m-3"
+                >Category</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-4" style="margin-bottom: 3vh">
+          <div class="card cards" style="width: 100%">
+            <img
+              src="../../images/control_orders.jpg"
+              class="card-img-top"
+              alt="control_orders"
+            />
+            <div class="card-body">
+              <a
+                href="/pages/admin/orders/index.html"
+                class="btn btn-warning m-3"
+                >Orders</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function logout() {
+  localStorage.removeItem("TOKEN")
+  window.location.pathname=""
 
+}
+    </script>
   </body>
 </html>
