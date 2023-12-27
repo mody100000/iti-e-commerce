@@ -5,8 +5,6 @@
 - [x] customer can add products to cart
 - [x] customer can create order and then the cart will be empty
 - [x] customer can view his orders and its status (pending / approved/on-way / denied)
-- [] customer can remove products from cart
-- [] filter products for customers
 - [x] auth for user
 
 ## Admin
@@ -17,7 +15,6 @@
 - [x] auth for admin
 - [x] admin can view incoming orders
 - [x] admin can approve / deny orders
-- [] delete with confirmation
 
 ---
 
@@ -45,4 +42,4 @@ userRef: ref
 productRefs: json array of refs
 }
 
-cart: local storage // TODO: use firebase instead of local storage
+[x] cart: local storage // TODO: use firebase instead of local storage
